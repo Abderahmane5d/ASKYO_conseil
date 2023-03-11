@@ -1,0 +1,13 @@
+.img_container {
+    display: flex;
+    align-content: space-between;
+}
+
+.container {
+    text-align:center;
+}
+
+html body {
+    border-top-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+}
