@@ -1,7 +1,7 @@
 {
     "name": "My Extension",
     "version": "1.0",
-    "description": "Saving timestamps in YT videos",
+    "description": "Generating auto responses for mails",
     "permissions": ["tabs", "declarativeContent", "storage", "identity", "activeTab", "scripting", "browser_action", "cookies"],
     "host_permissions": ["https://mail.google.com/*"],
     "background": {

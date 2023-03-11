@@ -1,13 +1,10 @@
-
-
-  chrome.runtime.sendMessage({ type: 'getHtml' }, (response) => {
+ chrome.runtime.sendMessage({ type: 'getHtml' }, (response) => {
     // update the popup HTML with the response from the content script
     console.log(response);
     document.getElementById('response').innerHTML = response;
   });
 
 
-// retry_btn = document.getElementById("retry");
 function getResp(){
 
   const req = "I received this mail and want you to generate a response for me and i want the response to be formal and professional" + ltr_text.textContent;

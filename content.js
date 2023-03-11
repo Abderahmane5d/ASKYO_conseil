@@ -36,7 +36,7 @@ function addButton() {
       fetch('http://localhost:8000/api/get-response', options)
         .then(response =>{
           if (response.status!=200){
-            console.log("an error has ocuired, try later");
+            console.log("an error has later, try later");
           }else{
             response.json()
               .then(data => {
@@ -45,37 +45,46 @@ function addButton() {
                   // console.log(to_inject);
                   console.log("after the fetch");
                   document.getElementById(':25').click();
-                  // chrome.runtime.sendMessage({
-                  //   type: "change_popup_content",
-                  //   newContent: to_inject
-                  // });
+                  
                   setTimeout( ()=>{
                     document.getElementById(":95").innerHTML=data.message;
                     const choice = document.createElement("img");
                     choice.src = "./assets/Logo_extension.png"
                     choice.alt=""
-                    // choice.type= "number";
-                    const bar = document.getElementsByClassName("btC");
-                    // const our_td = document.createElement("td");
-                    const sub = document.getElementById(":6d");
+                    const bar = document.querySelector("div .aoD");
+                    const sub = document.getElementById(":i5");
                     const emailOptions = [
-                      "formal",
-                      "informal",
-                      "funny",
-                      "apologetic",
-                      "promotional",
-                      "sympathy",
-                      "congratulations",
-                      "holiday greeting","invitation","feedback","reminder","sales pitch","personal update","professional update","announcement","appreciation","apology","welcome","farewell"
+                      " more formal"," moreinformal","funnier","apologetic","promotional"," forsympathy"," for congratulations"," for feedback"," includes a reminder","for personal update","for professional update","for appreciation","for apology"
                     ];
 
                     setInterval(function() {
-                      
-                    }, intervalTime);
+                      const req = "I received this mail and want you to generate a response for it which is" + emailOptions[Math.floor(Math.random()*emailOptions.length)]+"  : " + ltr_text.textContent;
+                      const req_body = {message: req};
+                      const options = {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(req_body)
+                      };
 
-                    if (sub){
-                      bar.appendChild(sub);
-                    }
+                      fetch('http://localhost:8000/api/get-response', options)
+                        .then(response =>{
+                          if (response.status!=200){
+                            console.log("an error has occurred , try later");
+                          }else{
+                            response.json()
+                              .then(data => {
+                                  console.log(data.message);
+                                  document.getElementById(":95").innerHTML=data.message;
+                                })
+                            }
+                          })
+                        .catch(error => console.error(error));
+
+                    }, 20000);
+
+                   
 
 
                     
