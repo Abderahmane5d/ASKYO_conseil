@@ -2,10 +2,10 @@
     "name": "My Extension",
     "version": "1.0",
     "description": "Generating auto responses for mails",
-    "permissions": ["tabs", "declarativeContent", "storage", "identity", "activeTab", "scripting", "browser_action", "cookies"],
+    "permissions": ["tabs", "runtime", "nativeMessaging", "declarativeContent", "storage", "identity", "activeTab", "scripting", "cookies"],
     "host_permissions": ["https://mail.google.com/*"],
     "background": {
-      "server_worker": "background.js"
+      "service_worker": "background.js"
     },
     "manifest_version": 3,
     "content_scripts": [

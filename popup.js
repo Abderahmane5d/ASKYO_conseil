@@ -1,7 +1,9 @@
- chrome.runtime.sendMessage({ type: 'getHtml' }, (response) => {
+//  chrome.runtime.sendMessage({ type: 'getHtml' }, (response) => {
     // update the popup HTML with the response from the content script
-    console.log(response);
-    document.getElementById('response').innerHTML = response;
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log(message);
+    document.getElementById('response').innerHTML = message;
+    sendResponse({message:message})
   });
 
 

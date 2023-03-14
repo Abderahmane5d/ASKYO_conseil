@@ -4,6 +4,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, { type: 'getHtml' }, (response) => {
           console.log(response);
+          document.getElementById('response').innerHTML = message;
           sendResponse(response);
         });
       });

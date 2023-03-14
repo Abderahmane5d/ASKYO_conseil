@@ -1,5 +1,5 @@
 console.log("Content script running!");
-setTimeout(addButton, 5000);
+// setTimeout(addButton, 5000);
 function addButton() {
   
   console.log("Content script running! addbutton");
@@ -8,6 +8,10 @@ function addButton() {
     button.innerText = "Generate Response";
     button.classList.add("ams");
     button.classList.add("bkH");
+    chrome.runtime.sendMessage({
+      type: "getHtml",
+      newContent: "This is the new popup content."
+    }, (response) => {console.log(response);});
     console.log((button.textContent));
     
 
@@ -33,7 +37,7 @@ function addButton() {
         body: JSON.stringify(req_body)
       };
 
-      fetch('http://localhost:8000/api/get-response', options)
+      fetch('https://askyo-api.onrender.com/api/get-response', options)
         .then(response =>{
           if (response.status!=200){
             console.log("an error has later, try later");
@@ -44,6 +48,7 @@ function addButton() {
                   let to_inject = data.message;
                   // console.log(to_inject);
                   console.log("after the fetch");
+                  
                   document.getElementById(':25').click();
                   
                   setTimeout( ()=>{
@@ -68,7 +73,7 @@ function addButton() {
                         body: JSON.stringify(req_body)
                       };
 
-                      fetch('http://localhost:8000/api/get-response', options)
+                      fetch('https://askyo-api.onrender.com/api/get-response', options)
                         .then(response =>{
                           if (response.status!=200){
                             console.log("an error has occurred , try later");
@@ -88,7 +93,7 @@ function addButton() {
 
 
                     
-                  }, 1000);
+                  }, 500);
                   
 
                   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -116,7 +121,7 @@ function addButton() {
       //   newContent: "This is the new popup content."
       // });
     })
-}
+}  
   
   function generateResponse() {
     // Code to generate a response using ChatGPT API
@@ -124,5 +129,7 @@ function addButton() {
   }
   // addButton();
   // Wait for the DOM to load
-  
-  document.addEventListener("DOMContentLoaded", addButton);
+  window.addEventListener("load", (event) => {
+    console.log("DOM entièrement chargé et analysé");
+  });
+window.addEventListener("load", addButton);
